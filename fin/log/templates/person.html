@@ -1,0 +1,144 @@
+{% extends "person_base.html" %}
+{% load staticfiles %}
+{% block title %}个人中心 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block article %} 
+
+<div>
+{% if username %}
+<big>欢迎你,{{username}}!</big>
+<p>
+<p>
+<p>
+<hr><hr>
+<div>
+<div class="lead">工作职位信息：</div>
+<p>职位编号<small>Number:</small>
+&nbsp&nbsp&nbsp&nbsp{{person.number}};
+<p>
+职位<small>Position:</small>
+&nbsp&nbsp&nbsp&nbsp{{person.position}};
+<p>
+E-mail:
+&nbsp&nbsp&nbsp&nbsp{{person.email}};
+<p>
+
+<div><small>
+修改E-mail:
+<form action="" method="post" enctype="multipart/form-data">
+{{uf.email}}
+<p>
+<button type="submit">ok</button>
+</form>
+</small>
+
+</div>
+</div>
+
+<p>
+<div>
+<hr><hr>
+<p>
+<div class="lead">账户信息：</div>
+<p>帐号<small>Name:</small>
+&nbsp&nbsp&nbsp&nbsp{{person.username}};
+<p>
+密码<small>Password:</small>
+&nbsp&nbsp&nbsp&nbsp{{person.password}};
+
+<div><small>
+修改密码:
+<form action="" method="post" enctype="multipart/form-data">
+{{ut.password}}
+<p>
+<button type="submit">ok</button>
+</form>
+</small>
+
+</div>
+
+</div>
+<hr><hr>
+<p>
+<div>
+<div class="lead">个人详细信息：</div>
+<p>真实姓名<small>Ture Name:</small>
+&nbsp&nbsp&nbsp&nbsp{{person.firstname}}&nbsp&nbsp{{person.lastname}};
+<p>
+电话<small>Phone Number:</small>
+&nbsp&nbsp&nbsp&nbsp{{person.phone}};
+<div><small>
+修改电话号码:
+<form action="" method="post" enctype="multipart/form-data">
+{{ua.phone}}
+<p>
+<button type="submit">ok</button>
+</form>
+</small>
+
+</div>
+<hr>
+<p>
+<hr>
+<p>
+地址:
+&nbsp&nbsp&nbsp&nbsp{{person.address}};
+<p>
+<div><small>
+修改详细地址:
+<form action="" method="post" enctype="multipart/form-data">
+{{ub.address}}
+<p>
+<button type="submit">ok</button>
+</form>
+</small>
+
+</div>
+
+
+
+</div>
+<p><p><p>
+<hr>
+<p><p><p><p><p><p><p><p><p>
+{% else %}
+<p>
+<h1><small>请登录网站，查看用户信息</small></h1>
+  <form class="" role="form">
+            <button type="submit" class="btn btn-default"><a href="/login/">登录</a></button>
+			
+          </form>
+
+{% endif %}
+
+</div>
+
+ {% endblock %}
+ <!--article完了-->
+ {% block aside %}   
+
+   
+  
+        <div class="well">
+			<img alt="" src="{% static "images/center.jpg" %}"/>
+        </div>
+
+
+
+
+
+	
+
+{% endblock %}

@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <meta charset="UTF-8" />
+    <title>
+        {% block title %}{% endblock %}        
+    </title>
+	
+	<link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/modernizr.js"></script>
+    <script src="/static/js/jquery.js"></script>
+	
+	<!-- 回到顶部css -->
+   <style type="text/css">
+	#form_top{
+		display:block;
+		bottom:5px;
+		left:25px;
+		position:fixed;
+		#color: #ECD672;
+	}
+	.top_img {
+		background-image: url("/static/images/topicon.png");
+		width: 50px;
+		height:50px;
+		cursor: pointer;
+	}
+	.top_img:hover {
+		background-image: url("/static/images/topiconblack.png");
+		}
+</style> 
+	
+	
+	
+	{% block extra_head %}
+    {% endblock %}
+	
+	
+	
+	
+</head>
+
+
+
+<body>
+
+
+
+
+    {% block body %}
+        {% block header %}
+            {# 标头 #}
+            {% block menu %}
+            {# 菜单 #}
+            {% endblock %}
+        {% endblock %}
+		
+		<div id="form_top"></div>
+		
+        <div class="container">
+        {% block content %}
+            {# 正文内容 #}
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">                            
+                        {% block article %}
+						{# 文章 #}
+                            {% block article_title %}
+							                              
+							{% endblock %}
+                            {% block article_content %}
+							
+							{% endblock %}
+                        {% endblock %}
+                        
+						
+						
+                        {% block article_menu %} {% endblock %}
+                        
+                        </div>
+                        <div class="col-md-3">
+                            {% block aside %}
+                                {% block tags %}{% endblock %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            {% block footer %}
+                {# 任何每个页面都可能修改的文本区域的页脚 #}
+				<DIV id=time>当前时间  
+					<SCRIPT>document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);</SCRIPT>  
+				</DIV> 
+				<p>
+				<hr>
+                <p>@Lac 2014 </p>
+            {% endblock %}
+        {% endblock %}
+    </div>
+
+	
+	
+	
+	
+    <script src="/static/js/bootstrap.min.js"></script>
+
+	 <script type="text/javascript"> /* TOP按钮 返回顶部 锚点 */
+        function form_top(){
+            document.write('<div id="form_top"><a href="#top" title="回到顶部"><div class="top_img"></div></a></div>')
+            }
+        form_top();
+		
+		$(function ()
+			{ $("#example").tooltip();
+			});
+    </script>
+	
+
+
+</body> 
+
+
+</html>

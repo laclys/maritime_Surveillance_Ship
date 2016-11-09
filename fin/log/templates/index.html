@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+    <title>首页</title>
+
+<!--Bootstrap-->
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/modernizr.js"></script>
+    <script src="/static/js/jquery.js"></script>
+
+<!--机务信息模态框-->
+<script type="text/javascript">
+
+$('#myModal').modal(options)
+
+</script>
+
+
+
+
+
+  <body>
+
+    <div class="container">
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default " role="navigation">
+        <div class="navbar-header">
+   
+          <a class="navbar-brand" href="#">海监船</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">首页</a></li>
+            <li><a href="#">机务信息</a></li>
+            <li><a href="{% url 'news.views.news_list' %}">新闻</a></li>
+			<li><a href="#">视频点播</a></li>
+			
+			<li><a class="btn" data-toggle="modal" data-target="#myModal" >航行动态</a>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+						<div class="modal-content">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">航行动态信息</h4>
+						</div>
+						
+						<div class="modal-body">
+							<p>船舶航行数据：</p>
+							<hr>
+							<!--all|slice:":1" 只显示循环的第一条-->
+						{% if ships %}
+							{% for ship in ships.all|slice:":1" %}
+							<small>dtmGPS:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.dtmGPS}}.</small>
+							<hr>
+							<small>floLON:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floLON}}&nbsp{{ship.vchLonUnit}}.</small>
+							<hr>
+							<small>floLAT:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floLAT}}&nbsp{{ship.vchLatUnit}}.</small>
+
+							<hr>
+							<small>floSPD:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floSPD}}.</small>
+							<hr>
+							<small>floDIR:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floDIR}}.</small>
+							<hr>
+							<small>floHDT:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floHDT}}.</small>	
+							
+							<hr>
+							<small>floHDM:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floHDM}}.</small>
+							<hr>
+							<small>floWST:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floWST}}.</small>
+							<hr>
+							<small>floWSR:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floWSR}}.</small>
+							<hr>
+							<small>floWDT:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floWDT}}&nbsp{{ship.vchWdtUnit}}.</small>
+							<hr>
+							<small>floWDR:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floWDR}}.</small>
+							<hr>
+							<small>floDPT:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floDPT}}.</small>	
+							<hr>
+							<small>floVLW:</small>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <small>{{ship.floVLW}}.</small>
+
+
+
+
+
+
+
+
+
+							<!--写入机务信息-->
+							{% endfor %}
+						{% else %}
+							<hr>
+							<big><font color="red">暂无数据！</font></big>
+							<hr>
+						 {% endif %}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<!--<button type="button" class="btn btn-default">Save changes</button>-->
+						</div>
+						</div><!-- /.modal-content -->
+						</div><!-- /.modal-dialog -->
+						</div><!-- /.modal -->
+			
+			</li>
+			
+			
+			<li><a href="{% url 'log.views.center' %}">个人信息</a></li>
+			
+			<!--下拉菜单-->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">更多 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">预留</a></li>
+                <li><a href="#">预留</a></li>
+                <li><a href="#">预留</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">预留</a></li>
+                <li><a href="#">预留</a></li>
+              </ul>
+            </li>
+          </ul>
+		  {% if username %}
+		  
+		  <form class="navbar-form navbar-right" role="form">
+			
+            <button type="submit" class="btn btn-default"><a href="/logout/">登出</a></button>
+			
+          </form>
+		  
+		  <ul class="nav navbar-nav navbar-right">
+						<li class="disabled" ><a href="#">欢迎回来{{username}}!</a></li>
+      
+					</ul>
+		  
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="{% url 'contact.views.contact' %}">Contact Me</a></li>
+      
+					</ul>
+		  
+		  
+		  
+		  
+		  {% else %}
+         <form class="navbar-form navbar-right" role="form">
+            <button type="submit" class="btn btn-default"><a href="/login/">登录</a></button>
+			
+          </form>
+		  
+					<ul class="nav navbar-nav navbar-right">
+						<li class="disabled" ><a href="#">请登录网站</a></li>
+      
+					</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="{% url 'contact.views.contact' %}">Contact Me</a></li>
+      
+			</ul>
+		  {% endif %}
+        </div><!--/.nav-collapse -->
+      </div>
+	  
+	  
+	  
+	  <!--导航截至   -->
+	  
+	  
+	  <!--XX船图片，文字介绍1400*500,1,2,3img -->
+	  <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="carousel slide" id="carousel-292888">
+				
+				<div class="carousel-inner">
+					<div class="item active">
+						<img alt="" src="{% static "images/1.jpg" %}"/>
+						<div class="carousel-caption">
+							<h4>
+								XX船
+							</h4>
+							<p>
+								中国第O代极地破冰船和科学考察船，由OOO船厂在19XX年X月XX日完成建造的一艘维他斯·白令级破冰船，
+								雪龙号的姐妹舰是俄罗斯Vasiliy Golovnin号。
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static "images/2.jpg" %}" />
+						<div class="carousel-caption">
+							<h4>
+								成功营救俄船乘客的中国OO号破冰船被厚冰困住
+							</h4>
+							<p>
+								XX网XX月XX日电据外电报道，成功救援被困南极俄罗斯“绍卡XXXX院士”号科考船上5X名乘客
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static "images/3.jpg" %}" />
+						<div class="carousel-caption">
+							<h4>
+								xx大学船工系学生参观“XX船”
+							</h4>
+							<p>
+								参观了停泊在外高桥的 “xx船”科学考察船。
+								本次参观人员是XXOO副教授所授课程《船舶设备》的学生，目的主要是让学生直观感受课堂所教授的内容。
+							</p>
+						</div>
+					</div>
+				</div> <a data-slide="prev" href="#carousel-292888" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-292888" class="right carousel-control">›</a>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+
+
+
+    </div> 
+	
+	<!-- /container -->
+	
+<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>背景</h2>
+          <p>“XX”号海监船是苏联解体前准备造的8条同型的供给北冰洋地区的一个运输公司使用的破冰船之一。
+		  前苏联解体，因为这条船是在乌克兰赫尔松船厂于1993年建造的。 </p>
+          <p><a class="btn btn-default" href="#" role="button">更多 &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>特点</h2>
+          <p>在“XX号”海监船上的餐厅、会议室、驾驶室、走廊，都能见到各种各样的地图，
+		  有世界地图、北极地图、南极地图、科学考察航次图。</p>
+          <p><a class="btn btn-default" href="#" role="button">更多 &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>性能</h2>
+          <p>“XX”号海监船总长167.0米，型宽22.6米，型深13.5米，满载吃水9.0米，
+		  自重11400吨，总吨位14997吨，满载排水量21025吨，最大航速17.9节，续航力19000海里。</p>
+          <p><a class="btn btn-default" href="#" role="button">更多 &raquo;</a></p>
+        </div>
+      </div>	
+	  
+	  <p>
+	  <p>
+	  <hr>
+	<DIV id=time>当前时间  
+	<SCRIPT>document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);</SCRIPT>  
+	</DIV> 
+	<footer>
+	
+        <p>&copy; Lac 2014</p>
+		
+      </footer>
+	
+	<script src="/static/js/bootstrap.min.js"></script>
+
+<
+	</body>
+</html>

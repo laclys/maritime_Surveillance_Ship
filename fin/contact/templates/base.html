@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        {% block title %}{% endblock %}        
+    </title>
+	
+	<link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/modernizr.js"></script>
+    <script src="/static/js/jquery.js"></script>
+    
+	
+	
+	
+	{% block extra_head %}
+    {% endblock %}
+	
+	
+	
+	
+</head>
+
+
+
+<body>
+
+
+
+
+    {% block body %}
+        {% block header %}
+            {# 标头 #}
+            {% block menu %}
+            {# 菜单 #}
+            {% endblock %}
+        {% endblock %}
+        <div class="container">
+        {% block content %}
+            {# 正文内容 #}
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">                            
+                        {% block article %}
+						{# 文章 #}
+                            {% block article_title %}
+							                              
+							{% endblock %}
+                            {% block article_content %}
+							
+							{% endblock %}
+                        {% endblock %}
+                        
+						
+						
+                        {% block article_menu %} {% endblock %}
+                        
+                        </div>
+                        <div class="col-md-3">
+                            {% block aside %}
+                                {% block tags %}{% endblock %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            {% block footer %}
+                {# 任何每个页面都可能修改的文本区域的页脚 #}
+                <p>@Lac 2014 </p>
+            {% endblock %}
+        {% endblock %}
+    </div>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+
+
+</body> 
+</html>

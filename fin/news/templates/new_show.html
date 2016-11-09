@@ -1,0 +1,117 @@
+{% extends "new_base.html" %}
+{% load staticfiles %}
+{% block title %} {{ new.caption }} {% endblock %}
+
+
+{% block article %} 
+{% if username %}
+<style type="text/css">
+#tupian{
+max-width:200px;
+
+}
+
+#tupian2{
+max-width:200px;
+
+}
+</style>
+{#图片等比例缩小#}
+
+
+
+
+<div class="content-main">
+    <article class="content-main">
+    {% block article_title %}
+        <h2>{{ new.caption }}</h2>
+    {% endblock %}
+    <p class="text-muted">
+        <i class="glyphicon glyphicon-user"></i><small> {{ new.author }}</small>  
+        <i class="glyphicon glyphicon-time"></i><small> {{ new.publish_time }}</small>
+    </p>
+        <section>
+        <div class="new-content">
+            {% block article_content %}
+                {{ new.content}}
+				<p>
+				<hr>
+				{% if new.pic %}
+				<a href="/upload/{{new.pic}}/"><img alt="!!!!!"  id="tupian" src="/upload/{{new.pic}}/"/></a>
+				
+				<p>
+				{{new.pic}}
+				<p>
+				{% else %}
+				{% endif %}
+				<!--<img alt="" src="{% static "images/1.jpg" %}"/>-->
+				{% if new.content2 %}
+				&nbsp &nbsp {{ new.content2}}
+				<p>
+				<p>
+				{% else %}
+				
+				{% endif %}
+				
+				
+				{% if new.content3 %}
+				&nbsp &nbsp{{ new.content3}}
+				<p>
+				<p>
+				{% else %}
+				
+				
+				{% endif %}
+				
+				{% if new.pic2 %}
+				<a href="/upload/{{new.pic2}}/"><img alt=""  id="tupian2" src="/upload/{{new.pic2}}/"/></a>
+				<p>
+				
+				
+				{{new.pic2}}
+				{% else %}
+				
+				{% endif %}
+				
+			<hr>
+				<p>
+				
+            {% endblock %} 
+        </div>
+    </section>
+    <section>
+        <div class="row post-info">
+            <div class="col-md-3">
+                <p>  
+                    <i class="glyphicon glyphicon-tag"></i>
+                    {% for tag in new.tags.all %}
+                         <small class="text-muted"> {{ tag }} </small>
+                    {% endfor %}
+                </p>  
+            </div>
+            <div class="col-md-2 col-md-offset-7">
+                
+                <a href="#cmt" title="comment"><i class="glyphicon glyphicon-comment"></i></a>
+            </div>
+        </div>
+    <hr>
+{# Duoshuo #}
+{% load duoshuo_tags %}
+
+{% duoshuo_comments %}
+    </section>    
+    </article>
+    <hr>
+</div>  
+{% else %}
+<p>
+<h1><small>请登录网站</small></h1>
+  <form class="" role="form">
+            <button type="submit" class="btn btn-default"><a href="/login/">登录</a></button>
+			
+          </form>
+
+{% endif %}
+
+  
+{% endblock %}

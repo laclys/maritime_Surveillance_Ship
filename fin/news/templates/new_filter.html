@@ -1,0 +1,51 @@
+{% extends "new_base.html" %}
+{% load staticfiles %}
+
+{% block title %} tag: {{ tag.tag_name }} {% endblock %}
+
+{% block article %}
+{% if username %}
+<article class='content-main'>
+    {% for new in news %}     
+        <h4><a href="{% url 'news.views.news_show' new.id %}">{{ new.caption }}</a></h4>
+        <div class="row">
+            <div class="col-md-3">
+                <p class="text-muted"><i class="glyphicon glyphicon-time"></i><small> {{ new.publish_time }}</small></p>       
+            </div>
+            <div class="col-md-2 col-md-offset-7">
+                
+              <a href="{% url 'news.views.news_show' new.id %}#cmt" title="comment"><i class="glyphicon glyphicon-comment"></i>
+			 </a>
+            </div>
+        </div>        
+        <hr class="soften">
+    {% empty %} 
+        <p class="text-info">no result!!</p>             
+    {% endfor %} 
+</article> 
+	
+{% else %}
+<p>
+<h1><small>请登录网站</small></h1>
+  <form class="" role="form">
+            <button type="submit" class="btn btn-default"><a href="/login/">登录</a></button>
+			
+          </form>
+
+{% endif %}	 
+{% endblock %}
+
+{% block aside %}   
+
+   
+    {% block tags %}
+        <div class="well">
+            {% for tag in tags %}
+            <span class="label"><a href="{% url 'news.views.news_filter' tag.id %}">{{ tag }}</a></span>
+			<hr>
+            {% endfor %}
+        </div>
+    {% endblock %}
+
+	
+{% endblock %}
